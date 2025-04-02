@@ -1,0 +1,60 @@
+{
+    "metadata": {
+      "title": "My First Song",
+      "creation_date": "2025-04-02",
+      "modification_date": "2025-04-02"
+    },
+    "bpm": 120,
+    "mixdown": {
+      "sample_rate": 44100,
+      "bit_depth": 16
+    },
+    "instruments": {
+      "synth1": {
+        "type": "synth",
+        "subtype": "subtractive",
+        "parameters": {
+          "oscillator_wave": "sawtooth",
+          "filter_type": "lowpass",
+          "filter_cutoff": 880.0,
+          "filter_resonance": 0.3,
+          "envelope_attack": 0.01,
+          "envelope_decay": 0.2,
+          "envelope_sustain": 0.7,
+          "envelope_release": 0.1
+        }
+      },
+      "sampler1": {
+        "type": "sampler",
+        "parameters": {
+          "sample_file": "audio/kick.wav",
+          "loop": false
+        }
+      }
+    },
+    "events": [
+      {
+        "time": "1.0",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "C4", "duration": 8 },
+          { "pitch": "E4", "duration": 8 },
+          { "pitch": "G4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "1.8",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "D4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "2.0",
+        "instrument": "sampler1",
+        "pitches": [
+          { "pitch": "C3", "duration": 8 } 
+        ]
+      }
+    ]
+  }

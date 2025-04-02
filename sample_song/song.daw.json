@@ -1,0 +1,121 @@
+{
+    "metadata": {
+      "title": "Mary Had a Little Lamb",
+      "creation_date": "2024-03-19",
+      "modification_date": "2024-03-19"
+    },
+    "bpm": 120,
+    "mixdown": {
+      "sample_rate": 44100,
+      "bit_depth": 16
+    },
+    "instruments": {
+      "synth1": {
+        "type": "synth",
+        "subtype": "subtractive",
+        "parameters": {
+          "oscillator_wave": "sine",
+          "filter_type": "lowpass",
+          "filter_cutoff": 880.0,
+          "filter_resonance": 0.3,
+          "envelope_attack": 0.01,
+          "envelope_decay": 0.2,
+          "envelope_sustain": 0.7,
+          "envelope_release": 0.1
+        }
+      }
+    },
+    "events": [
+      {
+        "time": "1.0",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "E4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "1.8",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "D4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "1.16",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "C4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "1.24",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "D4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "2.0",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "E4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "2.8",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "E4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "2.16",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "E4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "3.0",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "D4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "3.8",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "D4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "3.16",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "D4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "4.0",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "E4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "4.8",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "G4", "duration": 8 }
+        ]
+      },
+      {
+        "time": "4.16",
+        "instrument": "synth1",
+        "pitches": [
+          { "pitch": "G4", "duration": 8 }
+        ]
+      }
+    ]
+  }
