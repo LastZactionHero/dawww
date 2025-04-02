@@ -15,6 +15,7 @@ pub struct Metadata {
     pub title: String,
     pub creation_date: String,
     pub modification_date: String,
+    pub revision: u32,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

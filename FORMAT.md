@@ -19,8 +19,9 @@ This document outlines the file format for a synthesizer tracker application. Th
 **1. `metadata` (Dictionary):** Contains information about the song.
 
 * **`title` (String):** The title of the song.
-* **`creation_date` (String, YYYY-MM-DD):** The date the song was created.
-* **`modification_date` (String, YYYY-MM-DD):** The date the song was last modified.
+* **`creation_date` (String, ISO 8601):** The date and time the song was created in ISO 8601 format (e.g., "2024-03-19T15:30:45Z").
+* **`modification_date` (String, ISO 8601):** The date and time the song was last modified in ISO 8601 format.
+* **`revision` (Integer):** A monotonically increasing revision number starting at 0. This should be incremented each time the song is saved.
 
 **2. `bpm` (Integer):** Beats per minute for the song's tempo.
 
@@ -94,8 +95,8 @@ Here's an example of a `.daw.json` file:
 {
   "metadata": {
     "title": "My First Song",
-    "creation_date": "2025-04-02",
-    "modification_date": "2025-04-02"
+    "creation_date": "2025-04-02T15:30:45Z",
+    "modification_date": "2025-04-02T15:30:45Z"
   },
   "bpm": 120,
   "mixdown": {
