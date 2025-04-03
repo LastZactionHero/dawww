@@ -1,15 +1,31 @@
-I'd like you to write a program that serves as the mixdown application for a DAW. Given a song file, it will mix the entire song down to a wave file. For now, it's just a simple sine wave synth, but this will grow to be more complicated. Consider the full spec documented in this folder.
+This project represents a full-featured DAW in early development. Refer to the README for a complete description of what's been implemented so far.
 
-I'd like you to write a program that:
+I'd like you to write a basic synth tracker UI using the existing crates.
 
-- Reads a directory representing a song (sample in ./sample_song)
-- Parses the JSON file representing the song in the format specified
-- Saves internally in the app
-- Generates a wav file for the song
-- Saves the wav file to disk
+## Basic Project Details
+- Named something like dawww-ui
+- Requires a path to a song directory. If it exists, loads it. Otherwise, creates a default song
+- On new song, name is just the folder name
+- Displays a tracker interface as a grid.
+- Grid rows are Pitches. Refer to Pitch.rs for a complete list of pitches
+- Grid columsn are notes, as 32nd notes
 
-Command should be:
+## Tracker Grid
+- Implemented in the termianl with ncurses. Refer to `reference_only_kitty_grid` for a prior implementation of how to render a grid in the terminal (and note issues about chunking)
+- Grid should be shown in cyan color
+- Currently selected grid square should be yellow
+- Set notes should be magenta
+- Grid defaults to 64 columns, 24 px squares
+- Grid defaults to two octaves of pitches, centered at middle C.
+- Prevent scrolling past the beginning of the song, or outside of the grid generally. We'll improve this later
 
-mixdown ./sample_song ./sample_song.wav
+## Interface
+- User navigates around the grid with arrow keys
+- Grid
+- When navigating, the currently selected grid square highlights yellow
+- Pressing 'enter' sets or removes a note at that square. Notes will all just be be 32nd notes for now
+- Song is saved automatically whenever a note is modified
 
-Please write this in Rust.
+## Build Notes
+- Make sure the project builds, but don't try to run it. I'll validate, since I'll be using Kitty.
+- Don't worry about playback yet

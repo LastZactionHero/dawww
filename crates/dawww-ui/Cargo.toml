@@ -1,0 +1,23 @@
+[package]
+name = "dawww-ui"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dawww-core = { path = "../dawww-core" }
+dawww-render = { path = "../dawww-render" }
+base64 = "0.21"
+ab_glyph = "0.2"
+crossterm = "0.27"
+libc = "0.2"
+serde_json = "1.0"
+nix = "0.26"
+rand = "0.8"
+png = "0.17"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

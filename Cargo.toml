@@ -1,8 +1,9 @@
 [workspace]
 members = [
-    ".", "crates/sample-song-builder",
     "crates/dawww-core",
-    "crates/dawww-render"
+    "crates/dawww-render",
+    "crates/sample-song-builder",
+    "crates/dawww-ui"
 ]
 
 [package]
