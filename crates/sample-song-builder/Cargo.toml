@@ -1,0 +1,11 @@
+[package]
+name = "sample-song-builder"
+version = "0.1.0"
+edition = "2021"
+description = "A tool to build example songs for the dawww audio workstation"
+
+[dependencies]
+dawww-core = { path = "../dawww-core" }
+anyhow = "1.0"
+chrono = "0.4"
+serde_json = "1.0"

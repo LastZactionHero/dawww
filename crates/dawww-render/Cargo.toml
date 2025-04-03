@@ -1,0 +1,10 @@
+[package]
+name = "dawww-render"
+version = "0.1.0"
+edition = "2021"
+description = "Audio rendering and mixdown functionality for the dawww audio workstation"
+
+[dependencies]
+dawww-core = { path = "../dawww-core" }
+anyhow = "1.0"
+hound = "3.5"

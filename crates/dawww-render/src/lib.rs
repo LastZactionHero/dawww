@@ -1,16 +1,19 @@
-use crate::DawFile;
+use dawww_core::DawFile;
 use anyhow::Result;
 use std::path::Path;
 
+/// The main audio rendering engine that converts a DawFile into audio output
 pub struct AudioEngine {
     daw_file: DawFile,
 }
 
 impl AudioEngine {
+    /// Create a new AudioEngine instance from a DawFile
     pub fn new(daw_file: DawFile) -> Self {
         Self { daw_file }
     }
 
+    /// Render the song to a WAV file at the specified path
     pub fn render(&self, output_path: &Path) -> Result<()> {
         // Calculate total duration in seconds
         let seconds_per_32nd_note = 60.0 / (self.daw_file.bpm as f64 * 8.0);
@@ -32,10 +35,10 @@ impl AudioEngine {
             let time_in_seconds = self.parse_time(&event.time, seconds_per_32nd_note);
             let sample_index = (time_in_seconds * self.daw_file.mixdown.sample_rate as f64) as usize;
 
-            // For now, just generate a simple sine wave for each pitch
-            for pitch in &event.pitches {
-                let frequency = self.pitch_to_frequency(&pitch.pitch);
-                let duration_samples = (pitch.duration as f64 * seconds_per_32nd_note * self.daw_file.mixdown.sample_rate as f64) as usize;
+            // For now, just generate a simple sine wave for each note
+            for note in &event.notes {
+                let frequency = note.pitch.frequency(note.pitch.octave);
+                let duration_samples = (note.duration as f64 * seconds_per_32nd_note * self.daw_file.mixdown.sample_rate as f64) as usize;
 
                 for i in 0..duration_samples {
                     let t = i as f64 / self.daw_file.mixdown.sample_rate as f64;
@@ -60,37 +63,61 @@ impl AudioEngine {
         Ok(())
     }
 
+    /// Calculate the total duration of the song in seconds
     fn calculate_total_duration(&self, seconds_per_32nd_note: f64) -> f64 {
         let mut max_time = 0.0_f64;
         for event in &self.daw_file.events {
             let time = self.parse_time(&event.time, seconds_per_32nd_note);
-            for pitch in &event.pitches {
-                let duration = pitch.duration as f64 * seconds_per_32nd_note;
+            for note in &event.notes {
+                let duration = note.duration as f64 * seconds_per_32nd_note;
                 max_time = max_time.max(time + duration);
             }
         }
         max_time
     }
 
+    /// Parse a time string in the format "bar.32nd" into seconds
     fn parse_time(&self, time: &str, seconds_per_32nd_note: f64) -> f64 {
         let parts: Vec<&str> = time.split('.').collect();
         let bar = parts[0].parse::<f64>().unwrap();
         let thirty_second = parts[1].parse::<f64>().unwrap();
         ((bar - 1.0) * 32.0 + thirty_second) * seconds_per_32nd_note
     }
+}
 
-    fn pitch_to_frequency(&self, pitch: &str) -> f64 {
-        // Simple implementation for now - just handle C4 as 261.63 Hz
-        // TODO: Implement proper pitch parsing
-        match pitch {
-            "C4" => 261.63,
-            "D4" => 293.66,
-            "E4" => 329.63,
-            "F4" => 349.23,
-            "G4" => 392.00,
-            "A4" => 440.00,
-            "B4" => 493.88,
-            _ => 261.63, // Default to C4
-        }
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use dawww_core::{Note, pitch::{Pitch, Tone}, Event};
+    use std::path::PathBuf;
+
+    #[test]
+    fn test_parse_time() {
+        let daw_file = DawFile::new("Test".to_string());
+        let engine = AudioEngine::new(daw_file);
+        let seconds_per_32nd = 60.0 / (120.0 * 8.0); // At 120 BPM
+
+        assert_eq!(engine.parse_time("1.0", seconds_per_32nd), 0.0);
+        assert_eq!(engine.parse_time("1.16", seconds_per_32nd), 16.0 * seconds_per_32nd);
+        assert_eq!(engine.parse_time("2.0", seconds_per_32nd), 32.0 * seconds_per_32nd);
     }
-} 
+
+    #[test]
+    fn test_calculate_duration() {
+        let mut daw_file = DawFile::new("Test".to_string());
+        daw_file.set_bpm(120);
+
+        let note = Note::new(Pitch::new(Tone::C, 4), 8);
+        let event = Event {
+            time: "1.0".to_string(),
+            instrument: "test".to_string(),
+            notes: vec![note],
+        };
+        daw_file.events.push(event);
+
+        let engine = AudioEngine::new(daw_file);
+        let seconds_per_32nd = 60.0 / (120.0 * 8.0);
+        
+        assert_eq!(engine.calculate_total_duration(seconds_per_32nd), 8.0 * seconds_per_32nd);
+    }
+}

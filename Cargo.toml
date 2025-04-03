@@ -1,3 +1,10 @@
+[workspace]
+members = [
+    ".", "crates/sample-song-builder",
+    "crates/dawww-core",
+    "crates/dawww-render"
+]
+
 [package]
 name = "dawww"
 version = "0.1.0"
@@ -11,4 +18,6 @@ serde_json = "1.0"
 hound = "3.5"
 clap = { version = "4.4", features = ["derive"] }
 anyhow = "1.0"
-thiserror = "1.0" 
+thiserror = "1.0"
+dawww-core = { path = "crates/dawww-core" }
+dawww-render = { path = "crates/dawww-render" } 
