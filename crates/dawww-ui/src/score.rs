@@ -37,7 +37,7 @@ pub struct Score {
 impl Score {
     pub fn new() -> Self {
         let mut daw_file = DawFile::new("Untitled".to_string());
-        daw_file.add_instrument("default".to_string(), Instrument::new_sampler("default".into())).unwrap();
+        daw_file.add_instrument("synth1".to_string(), Instrument::new_sampler("synth1".into())).unwrap();
         
         Self {
             daw_file,
@@ -47,8 +47,8 @@ impl Score {
 
     pub fn from_daw_file(mut daw_file: DawFile) -> Self {
         // Ensure the default instrument exists
-        if daw_file.get_instrument("default").is_none() {
-            daw_file.add_instrument("default".to_string(), Instrument::new_sampler("default".into()))
+        if daw_file.get_instrument("synth1").is_none() {
+            daw_file.add_instrument("synth1".to_string(), Instrument::new_sampler("synth1".into()))
                 .expect("Failed to add default instrument");
         }
 
@@ -96,7 +96,7 @@ impl Score {
 
     pub fn notes_starting_at_time(&self, onset_b32: u64) -> Vec<Note> {
         let time_str = self.b32_to_time_str(onset_b32);
-        let events = self.daw_file.get_events_by_instrument("default");
+        let events = self.daw_file.get_events_by_instrument("synth1");
         
         events.iter()
             .filter(|e| e.time == time_str)
@@ -109,7 +109,7 @@ impl Score {
     }
 
     pub fn time_within_song(&self, time_point_b32: u64) -> bool {
-        let events = self.daw_file.get_events_by_instrument("default");
+        let events = self.daw_file.get_events_by_instrument("synth1");
         if events.is_empty() {
             return false;
         }
@@ -129,7 +129,7 @@ impl Score {
         let daw_note = DawNote::new(pitch, duration_b32 as u32);
 
         // Check if note exists
-        let events = self.daw_file.get_events_by_instrument("default");
+        let events = self.daw_file.get_events_by_instrument("synth1");
         let note_exists = events.iter()
             .filter(|e| e.time == time_str)
             .flat_map(|e| &e.notes)
@@ -137,10 +137,10 @@ impl Score {
 
         if note_exists {
             // Remove the note
-            self.daw_file.remove_note(&time_str, "default", &daw_note).unwrap();
+            self.daw_file.remove_note(&time_str, "synth1", &daw_note).unwrap();
         } else {
             // Add the note
-            self.daw_file.add_note(&time_str, "default", daw_note).unwrap();
+            self.daw_file.add_note(&time_str, "synth1", daw_note).unwrap();
         }
 
         self.try_save();
@@ -154,7 +154,7 @@ impl Score {
 
         if let Ok(events) = self.daw_file.get_events_in_range(&start_time, &end_time) {
             for event in events {
-                if event.instrument == "default" {
+                if event.instrument == "synth1" {
                     for note in &event.notes {
                         if note.pitch >= selection_range.pitch_low && note.pitch <= selection_range.pitch_high {
                             let onset_b32 = self.time_str_to_b32(&event.time);
@@ -172,7 +172,7 @@ impl Score {
         match time_point_start_b32 {
             Some(new_start_time) => {
                 let mut new_score = Score::new();
-                let events = self.daw_file.get_events_by_instrument("default");
+                let events = self.daw_file.get_events_by_instrument("synth1");
 
                 if events.is_empty() {
                     return self.clone();
@@ -213,7 +213,7 @@ impl Score {
         let end_b32 = onset_b32 + duration_b32;
 
         // Find all overlapping notes with the same pitch
-        let events = self.daw_file.get_events_by_instrument("default");
+        let events = self.daw_file.get_events_by_instrument("synth1");
         let mut overlapping_notes = Vec::new();
 
         for event in events {
@@ -230,7 +230,7 @@ impl Score {
 
         // Remove all overlapping notes
         for (time, note) in &overlapping_notes {
-            self.daw_file.remove_note(time, "default", note).unwrap();
+            self.daw_file.remove_note(time, "synth1", note).unwrap();
         }
 
         // Calculate merged note boundaries
@@ -258,13 +258,13 @@ impl Score {
         let merged_time = self.b32_to_time_str(merged_onset);
         let merged_duration = merged_end - merged_onset;
         let daw_note = DawNote::new(pitch, merged_duration as u32);
-        self.daw_file.add_note(&merged_time, "default", daw_note).unwrap();
+        self.daw_file.add_note(&merged_time, "synth1", daw_note).unwrap();
         self.try_save();
     }
 
     pub fn merge_down(&self, other: &Score) -> Score {
         let mut merged_score = self.clone();
-        let other_events = other.daw_file.get_events_by_instrument("default");
+        let other_events = other.daw_file.get_events_by_instrument("synth1");
 
         for event in other_events {
             for note in &event.notes {
@@ -277,7 +277,7 @@ impl Score {
     }
 
     pub fn duration(&self) -> u64 {
-        let events = self.daw_file.get_events_by_instrument("default");
+        let events = self.daw_file.get_events_by_instrument("synth1");
         if events.is_empty() {
             return 0;
         }
@@ -303,7 +303,7 @@ impl Score {
     }
 
     pub fn notes_active_at_time(&self, time_point_b32: u64) -> Vec<ActiveNote> {
-        let events = self.daw_file.get_events_by_instrument("default");
+        let events = self.daw_file.get_events_by_instrument("synth1");
         
         let mut active_notes = Vec::new();
         
@@ -344,7 +344,7 @@ impl Score {
         let mut notes_to_remove = Vec::new();
         if let Ok(events) = self.daw_file.get_events_in_range(&start_time, &end_time) {
             for event in events {
-                if event.instrument == "default" {
+                if event.instrument == "synth1" {
                     for note in &event.notes {
                         if note.pitch >= selection_range.pitch_low && note.pitch <= selection_range.pitch_high {
                             notes_to_remove.push((event.time.clone(), note.clone()));
@@ -356,7 +356,7 @@ impl Score {
 
         // Then remove them
         for (time, note) in notes_to_remove {
-            self.daw_file.remove_note(&time, "default", &note).unwrap();
+            self.daw_file.remove_note(&time, "synth1", &note).unwrap();
         }
 
         self.try_save();
@@ -372,8 +372,8 @@ impl Score {
 
     pub fn get_notes(&self) -> HashMap<u64, Vec<Note>> {
         let mut notes = HashMap::new();
-        let events = self.daw_file.get_events_by_instrument("default");
-        
+        let events = self.daw_file.get_events_by_instrument("synth1");
+
         for event in events {
             let onset_b32 = self.time_str_to_b32(&event.time);
             let notes_at_time = event.notes.iter().map(|n| Note {
@@ -394,7 +394,7 @@ mod tests {
 
     fn create_test_score() -> Score {
         let mut daw_file = DawFile::new("Test Song".to_string());
-        daw_file.add_instrument("default".to_string(), Instrument::new_sampler("default".into())).unwrap();
+        daw_file.add_instrument("synth1".to_string(), Instrument::new_sampler("synth1".into())).unwrap();
         
         let mut score = Score {
             daw_file,

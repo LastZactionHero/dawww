@@ -79,10 +79,11 @@ impl SongFile {
         let content = std::fs::read_to_string(&path)?;
         let daw_file = dawww_core::read_daw_file(&path)
             .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
-        
         let score = Score::from_daw_file(daw_file);
         self.current_path = Some(path);
         self.score = score.clone();
+
+        log::info!("Loaded notes: {:#?}", score.get_notes());
         Ok(score)
     }
 } 
