@@ -10,12 +10,14 @@ use dawww_core::{read_daw_file, find_daw_file};
 
 pub struct SongFile {
     current_path: Option<PathBuf>,
+    score: Score,
 }
 
 impl SongFile {
     pub fn new() -> Self {
         SongFile {
             current_path: None,
+            score: Score::new(),
         }
     }
 
@@ -34,11 +36,12 @@ impl SongFile {
         writeln!(file, "BPM: {}", score.get_bpm())?;
         
         // Write notes
-        let mut sorted_times: Vec<_> = score.get_notes().keys().collect();
+        let notes = score.get_notes();
+        let mut sorted_times: Vec<_> = notes.keys().collect();
         sorted_times.sort();
         
         for &time in sorted_times {
-            if let Some(notes) = score.get_notes().get(&time) {
+            if let Some(notes) = notes.get(&time) {
                 let mut note_strs = Vec::new();
                 
                 for note in notes {
@@ -72,32 +75,14 @@ impl SongFile {
         Ok(())
     }
 
-    pub fn load(&mut self, path: PathBuf) -> Result<Score> {
-        // Validate path exists
-        if !path.exists() {
-            return Err(anyhow!("File or directory does not exist: {}", path.display()));
-        }
-
-        // If path is a directory, find the .daw.json file
-        let path = if path.is_dir() {
-            let daw_file = find_daw_file(&path)?;
-            path.join(daw_file)
-        } else {
-            path
-        };
-
-        // Validate file extension
-        if path.extension().map_or(true, |ext| ext != "json") {
-            return Err(anyhow!("File must have .json extension"));
-        }
-
-        // Load and parse the DawFile
-        let daw_file = read_daw_file(&path)?;
+    pub fn load(&mut self, path: PathBuf) -> io::Result<Score> {
+        let content = std::fs::read_to_string(&path)?;
+        let daw_file = dawww_core::read_daw_file(&path)
+            .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
         
-        // Create a new Score from the DawFile
         let score = Score::from_daw_file(daw_file);
-        
         self.current_path = Some(path);
+        self.score = score.clone();
         Ok(score)
     }
 } 
