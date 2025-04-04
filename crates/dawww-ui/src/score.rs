@@ -55,7 +55,7 @@ impl Score {
         // Ensure the default instrument exists
         if daw_file.get_instrument("default").is_none() {
             daw_file.add_instrument("default".to_string(), dawww_core::Instrument::new_sampler("default".into()))
-                .expect("Failed to add default instrument");
+                .expect("Failed to add default instrument"); // Use expect for clearer error
         }
 
         let mut score = Self {
@@ -122,13 +122,14 @@ impl Score {
 
     pub fn set_bpm(&mut self, bpm: u16) {
         self.daw_file.set_bpm(bpm as u32);
-        self.try_save();
+        self.try_save(); // Auto-save
     }
 
     pub fn set_save_path(&mut self, path: PathBuf) {
         self.save_path = Some(path);
     }
 
+    // Private helper to attempt saving
     fn try_save(&mut self) {
         if let Some(path) = &self.save_path {
             if let Err(e) = self.daw_file.save(path) {
@@ -198,7 +199,7 @@ impl Score {
             let time_str = self.b32_to_time_str(onset_b32);
             let daw_note = DawNote::new(pitch, duration_b32 as u32);
             self.daw_file.remove_note(&time_str, "default", &daw_note).unwrap();
-            self.try_save();
+            self.try_save(); // Auto-save after removal
             return;
         }
 
@@ -223,7 +224,7 @@ impl Score {
         let time_str = self.b32_to_time_str(onset_b32);
         let daw_note = DawNote::new(pitch, duration_b32 as u32);
         self.daw_file.add_note(&time_str, "default", daw_note).unwrap();
-        self.try_save();
+        self.try_save(); // Auto-save after insertion
     }
 
     pub fn clone_at_selection(&self, selection_range: SelectionRange) -> Score {
@@ -351,7 +352,7 @@ impl Score {
         let time_str = self.b32_to_time_str(merged_onset);
         let daw_note = DawNote::new(pitch, (merged_end - merged_onset) as u32);
         self.daw_file.add_note(&time_str, "default", daw_note).unwrap();
-        self.try_save();
+        self.try_save(); // Auto-save
     }
 
     pub fn merge_down(&self, other: &Score) -> Score {
@@ -488,13 +489,13 @@ impl Score {
         }
 
         debug!("Finished rebuilding active_notes");
-        self.try_save();
+        self.try_save(); // Auto-save after deletion
     }
 
     pub fn save_to_file(&mut self, path: &PathBuf) -> Result<(), anyhow::Error> {
         let result = self.daw_file.save(path);
         if result.is_ok() {
-            self.save_path = Some(path.clone());
+            self.save_path = Some(path.clone()); // Update save_path on successful save
         }
         result
     }
