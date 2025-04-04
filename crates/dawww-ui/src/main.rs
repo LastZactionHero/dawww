@@ -26,7 +26,6 @@ use app_state::AppState;
 use crate::score::Score;
 use std::collections::HashMap;
 use crate::song_file::SongFile;
-use dawww_core::pitch::{Pitch, Tone};
 
 fn main() -> io::Result<()> {
     // Initialize logging
@@ -53,11 +52,7 @@ fn main() -> io::Result<()> {
         }
     } else {
         info!("Starting with blank song");
-        Arc::new(Mutex::new(Score {
-            bpm: 120,
-            notes: HashMap::new(),
-            active_notes: HashMap::new(),
-        }))
+        Arc::new(Mutex::new(Score::new()))
     };
     
     let mut app_state = AppState::new(score);

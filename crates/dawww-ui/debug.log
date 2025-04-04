@@ -1,40 +1,108 @@
-03:59:53 [INFO] Application starting...
-03:59:53 [INFO] Starting with blank song
-03:59:53 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-03:59:53 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:00 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:00 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:00 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:00 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:00 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:00 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:01 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:01 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:01 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:01 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:02 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:02 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:02 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:02 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:03 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=36, h=13
-04:00:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=36, h=13
-04:00:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=36, h=13
-04:00:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-04:00:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=181, h=13
-04:00:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:15 [INFO] Application starting...
+04:35:15 [INFO] Starting with blank song
+04:35:15 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:15 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:15 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:15 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:16 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:17 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:18 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:18 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:18 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:18 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:18 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:18 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:18 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:18 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:18 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:18 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:19 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:21 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:21 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:22 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:22 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:22 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:22 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:22 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:22 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:23 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:23 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:23 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:23 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:25 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:25 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:25 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:25 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:25 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:25 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:26 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:27 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:27 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:27 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:27 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+04:35:27 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=75, h=13
+04:35:27 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches

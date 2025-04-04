@@ -69,7 +69,7 @@ impl ScoreDrawComponent {
         let num_pitches_to_display = pos.h - 1;
 
         let middle_pitch = self.score_viewport.middle_pitch;
-        let mut pitches = vec![middle_pitch];
+        let mut pitches: Vec<Pitch> = vec![middle_pitch];
         for _ in 0..(num_pitches_to_display / 2) {
             if let Some(prev_pitch) = pitches.last().unwrap().prev() {
                 pitches.push(prev_pitch);

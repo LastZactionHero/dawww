@@ -31,7 +31,7 @@ impl Player {
         // Calculate ticks per b32 based on sample rate
         // For 120 BPM: 44100 samples/sec * 60 sec/min / 120 beats/min / 32 subdivisions = 689.0625 samples/b32
         // Rounding to 689 samples per b32 unit
-        let ticks_per_b32 = (sample_rate * 60 / score.lock().unwrap().bpm as u64) / 32;
+        let ticks_per_b32 = (sample_rate * 60 / score.lock().unwrap().get_bpm() as u64) / 32;
 
         Player {
             score,

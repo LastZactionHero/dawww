@@ -5,6 +5,7 @@ use crate::cursor::Cursor;
 use crate::draw_components::Position;
 use crate::score_viewport::ScoreViewport;
 use crate::loop_state::{LoopState, LoopMode};
+use dawww_core::pitch::Pitch;
 
 pub struct StatusBarComponent {
     cursor: Cursor,

@@ -32,14 +32,14 @@ impl SongFile {
         let mut file = File::create(&path)?;
         
         // Write BPM
-        writeln!(file, "BPM: {}", score.bpm)?;
+        writeln!(file, "BPM: {}", score.get_bpm())?;
         
         // Write notes
-        let mut sorted_times: Vec<_> = score.notes.keys().collect();
+        let mut sorted_times: Vec<_> = score.get_notes().keys().collect();
         sorted_times.sort();
         
         for &time in sorted_times {
-            if let Some(notes) = score.notes.get(&time) {
+            if let Some(notes) = score.get_notes().get(&time) {
                 let mut note_strs = Vec::new();
                 
                 for note in notes {
@@ -74,11 +74,7 @@ impl SongFile {
     }
 
     pub fn load(path: PathBuf) -> io::Result<Score> {
-        let mut score = Score {
-            bpm: 120,
-            notes: HashMap::new(),
-            active_notes: HashMap::new(),
-        };
+        let mut score = Score::new();
 
         let file = File::open(&path)?;
         let reader = BufReader::new(file);
@@ -86,7 +82,7 @@ impl SongFile {
         for line in reader.lines() {
             let line = line?.trim().to_string();
             if line.starts_with("BPM:") {
-                score.bpm = line[4..].trim().parse().expect("Invalid BPM format");
+                score.set_bpm(line[4..].trim().parse().expect("Invalid BPM format"));
             } else if !line.is_empty() {
                 let parts: Vec<&str> = line.split(':').map(|s| s.trim()).collect();
                 if parts.len() == 2 {

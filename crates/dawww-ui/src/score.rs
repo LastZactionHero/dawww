@@ -3,7 +3,10 @@
 use std::{collections::HashMap, f32::MAX};
 use log::debug;
 
-use dawww_core::pitch::{Pitch, Tone};
+use dawww_core::{
+    pitch::{Pitch, Tone},
+    DawFile, Event, Note as DawNote,
+};
 use crate::{
     selection_buffer,
 };
@@ -31,12 +34,105 @@ pub struct ActiveNote {
 
 #[derive(Debug, Clone)]
 pub struct Score {
-    pub bpm: u16,
-    pub notes: HashMap<u64, Vec<Note>>,
-    pub active_notes: HashMap<u64, Vec<ActiveNote>>,
+    daw_file: DawFile,
+    notes: HashMap<u64, Vec<Note>>,
+    active_notes: HashMap<u64, Vec<ActiveNote>>,
 }
 
 impl Score {
+    pub fn new() -> Self {
+        let mut daw_file = DawFile::new("Untitled".to_string());
+        daw_file.add_instrument("default".to_string(), dawww_core::Instrument::new_sampler("default".into())).unwrap();
+        
+        Self {
+            daw_file,
+            notes: HashMap::new(),
+            active_notes: HashMap::new(),
+        }
+    }
+
+    pub fn from_daw_file(daw_file: DawFile) -> Self {
+        let mut score = Self {
+            daw_file,
+            notes: HashMap::new(),
+            active_notes: HashMap::new(),
+        };
+        score.sync_from_daw_file();
+        score
+    }
+
+    fn sync_from_daw_file(&mut self) {
+        // Clear existing notes
+        self.notes.clear();
+        self.active_notes.clear();
+
+        // Collect events first to avoid borrow issues
+        let events: Vec<_> = self.daw_file.events.iter().collect();
+
+        // First collect all notes
+        let mut notes_to_add: Vec<(u64, Note)> = Vec::new();
+        for event in events {
+            let onset_b32 = self.time_str_to_b32(&event.time);
+            for note in &event.notes {
+                let note = Note {
+                    pitch: note.pitch,
+                    onset_b32,
+                    duration_b32: note.duration as u64,
+                };
+                notes_to_add.push((onset_b32, note));
+            }
+        }
+
+        // Then add them to the notes map
+        for (onset_b32, note) in notes_to_add.iter() {
+            self.notes.entry(*onset_b32).or_insert_with(Vec::new).push(*note);
+        }
+
+        // Finally update active notes
+        for (_, note) in notes_to_add {
+            self.update_active_notes(note);
+        }
+    }
+
+    fn b32_to_time_str(&self, b32: u64) -> String {
+        // Convert b32 to bar.32nd format for DawFile
+        let bar = (b32 / 32) + 1;
+        let thirty_second = b32 % 32;
+        format!("{}.{}", bar, thirty_second)
+    }
+
+    fn time_str_to_b32(&self, time: &str) -> u64 {
+        // Convert bar.32nd format from DawFile to b32
+        let parts: Vec<&str> = time.split('.').collect();
+        let bar = parts[0].parse::<u64>().unwrap();
+        let thirty_second = parts[1].parse::<u64>().unwrap();
+        ((bar - 1) * 32) + thirty_second
+    }
+
+    pub fn get_bpm(&self) -> u16 {
+        self.daw_file.bpm as u16
+    }
+
+    pub fn set_bpm(&mut self, bpm: u16) {
+        self.daw_file.set_bpm(bpm as u32);
+    }
+
+    pub fn get_notes(&self) -> &HashMap<u64, Vec<Note>> {
+        &self.notes
+    }
+
+    pub fn get_notes_mut(&mut self) -> &mut HashMap<u64, Vec<Note>> {
+        &mut self.notes
+    }
+
+    pub fn get_active_notes(&self) -> &HashMap<u64, Vec<ActiveNote>> {
+        &self.active_notes
+    }
+
+    pub fn get_active_notes_mut(&mut self) -> &mut HashMap<u64, Vec<ActiveNote>> {
+        &mut self.active_notes
+    }
+
     pub fn notes_starting_at_time(&self, onset_b32: u64) -> Vec<Note> {
         self.notes
             .get(&onset_b32)
@@ -77,6 +173,11 @@ impl Score {
             }
             notes_starting_at_time.remove(matching_note_index);
             self.notes.insert(onset_b32, notes_starting_at_time);
+            
+            // Remove from DawFile
+            let time_str = self.b32_to_time_str(onset_b32);
+            let daw_note = DawNote::new(pitch, duration_b32 as u32);
+            self.daw_file.remove_note(&time_str, "default", &daw_note).unwrap();
             return;
         }
 
@@ -96,21 +197,20 @@ impl Score {
         }
 
         self.update_active_notes(note_to_insert);
+
+        // Add to DawFile
+        let time_str = self.b32_to_time_str(onset_b32);
+        let daw_note = DawNote::new(pitch, duration_b32 as u32);
+        self.daw_file.add_note(&time_str, "default", daw_note).unwrap();
     }
 
-    // Creates a new Score with just notes between selection times and pitches.
     pub fn clone_at_selection(&self, selection_range: SelectionRange) -> Score {
-        let mut new_score = Score {
-            bpm: self.bpm,
-            notes: HashMap::new(),
-            active_notes: HashMap::new(),
-        };
+        let mut new_score = Score::new();
 
         for (&onset_b32, notes_at_onset) in &self.notes {
             if onset_b32 >= selection_range.time_point_start_b32 && onset_b32 < selection_range.time_point_end_b32 {
                 for note in notes_at_onset {
                     if note.pitch >= selection_range.pitch_low && note.pitch <= selection_range.pitch_high {
-                        // Assuming Pitch implements PartialOrd
                         new_score.insert_or_remove(note.pitch, note.onset_b32, note.duration_b32);
                     }
                 }
@@ -123,11 +223,7 @@ impl Score {
     pub fn translate(&self, time_point_start_b32: Option<u64>) -> Score {
         match time_point_start_b32 {
             Some(new_start_time) => {
-                let mut new_score = Score {
-                    bpm: self.bpm,
-                    notes: HashMap::new(),
-                    active_notes: HashMap::new(),
-                };
+                let mut new_score = Score::new();
 
                 let mut min_onset = u64::MAX;
                 for (&onset_b32, _) in &self.notes {
@@ -135,8 +231,7 @@ impl Score {
                 }
 
                 if min_onset == u64::MAX {
-                    // No notes in the original score
-                    return self.clone(); // Return a copy if no notes exist
+                    return self.clone();
                 }
 
                 let time_offset = if min_onset > new_start_time {
@@ -159,7 +254,7 @@ impl Score {
 
                 new_score
             }
-            None => self.clone(), // Return a copy if no new start time is provided
+            None => self.clone(),
         }
     }
 
@@ -172,7 +267,6 @@ impl Score {
             for note in notes {
                 if note.pitch == pitch {
                     let existing_end = note.onset_b32 + note.duration_b32;
-                    // Check if notes strictly overlap (not just adjacent)
                     if !(existing_end <= onset_b32 || note.onset_b32 >= end_b32) {
                         overlapping_notes.push((existing_onset, *note));
                     }
@@ -230,6 +324,11 @@ impl Score {
         }
 
         self.update_active_notes(merged_note);
+
+        // Update DawFile
+        let time_str = self.b32_to_time_str(merged_onset);
+        let daw_note = DawNote::new(pitch, (merged_end - merged_onset) as u32);
+        self.daw_file.add_note(&time_str, "default", daw_note).unwrap();
     }
 
     pub fn merge_down(&self, other: &Score) -> Score {
@@ -246,7 +345,7 @@ impl Score {
 
     pub fn duration(&self) -> u64 {
         if self.notes.is_empty() {
-            return 0; // Return 0 if the score is empty
+            return 0;
         }
 
         let mut first_onset = u64::MAX;
@@ -260,16 +359,13 @@ impl Score {
         }
 
         if first_onset == u64::MAX {
-            // No notes found
             return 0;
         }
 
         last_final_time - first_onset
     }
 
-    // Helper method to update active_notes when inserting/removing notes
     fn update_active_notes(&mut self, note: Note) {
-        // Add new entries
         for t in note.onset_b32..=note.onset_b32 + note.duration_b32 - 1 {
             let state = if t == note.onset_b32 {
                 NoteState::Onset
@@ -301,13 +397,11 @@ impl Score {
         }
     }
 
-    // New method to get active notes at a specific time
     pub fn notes_active_at_time(&self, time_point_b32: u64) -> Vec<ActiveNote> {
-        let result = self.active_notes
+        self.active_notes
             .get(&time_point_b32)
             .cloned()
-            .unwrap_or_default();
-        result
+            .unwrap_or_default()
     }
 
     pub fn delete_in_selection(&mut self, selection_range: SelectionRange) {
@@ -333,6 +427,13 @@ impl Score {
                     notes_to_keep.insert(onset_b32, keep);
                 } else {
                     onsets_to_remove.push(onset_b32);
+                }
+
+                // Remove from DawFile
+                for note in remove {
+                    let time_str = self.b32_to_time_str(onset_b32);
+                    let daw_note = DawNote::new(note.pitch, note.duration_b32 as u32);
+                    self.daw_file.remove_note(&time_str, "default", &daw_note).unwrap();
                 }
             }
         }
@@ -374,7 +475,7 @@ mod tests {
 
     fn create_test_score() -> Score {
         let mut score = Score {
-            bpm: 120,
+            daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
         };
@@ -411,7 +512,7 @@ mod tests {
     #[test]
     fn test_insert_or_remove() {
         let mut score = Score {
-            bpm: 120,
+            daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
         };
@@ -463,7 +564,7 @@ mod tests {
     #[test]
     fn test_insert() {
         let mut score = Score {
-            bpm: 120,
+            daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
         };
@@ -482,14 +583,14 @@ mod tests {
     #[test]
     fn test_merge_down() {
         let mut score1 = Score {
-            bpm: 120,
+            daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
         };
         score1.insert(Pitch::new(Tone::C, 4), 0, 32);
 
         let mut score2 = Score {
-            bpm: 120,
+            daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
         };
@@ -502,7 +603,7 @@ mod tests {
     #[test]
     fn test_duration() {
         let empty_score = Score {
-            bpm: 120,
+            daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
         };
@@ -515,7 +616,7 @@ mod tests {
     #[test]
     fn test_note_states() {
         let mut score = Score {
-            bpm: 120,
+            daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
         };
@@ -549,7 +650,7 @@ mod tests {
     #[test]
     fn test_overlapping_notes() {
         let mut score = Score {
-            bpm: 120,
+            daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
         };
@@ -576,7 +677,7 @@ mod tests {
     #[test]
     fn test_remove_note() {
         let mut score = Score {
-            bpm: 120,
+            daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
         };
@@ -599,7 +700,7 @@ mod tests {
     #[test]
     fn test_multiple_pitches() {
         let mut score = Score {
-            bpm: 120,
+            daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
         };
