@@ -1,5 +1,5 @@
 use crate::draw_components::ViewportDrawResult;
-use crate::pitch::Pitch;
+use dawww_core::pitch::Pitch;
 use crate::resolution::Resolution;
 use std::fmt;
 

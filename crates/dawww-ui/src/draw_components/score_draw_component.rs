@@ -5,7 +5,7 @@ use super::{DrawComponent, DrawResult, ViewportDrawResult};
 use crate::cursor::Cursor;
 use crate::draw_components::Position;
 use crate::events::InputEvent;
-use crate::pitch::Pitch;
+use dawww_core::pitch::Pitch;
 use crate::player::PlayState;
 use crate::score::{ActiveNote, NoteState, Score};
 use crate::score_viewport::ScoreViewport;

@@ -13,7 +13,6 @@ mod cursor;
 mod draw_components;
 mod events;
 mod loop_state;
-mod pitch;
 mod player;
 mod resolution;
 mod score;
@@ -27,6 +26,7 @@ use app_state::AppState;
 use crate::score::Score;
 use std::collections::HashMap;
 use crate::song_file::SongFile;
+use dawww_core::pitch::{Pitch, Tone};
 
 fn main() -> io::Result<()> {
     // Initialize logging

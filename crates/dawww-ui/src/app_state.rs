@@ -2,7 +2,7 @@
 use crate::cursor::Cursor;
 use crate::draw_components::ViewportDrawResult;
 use crate::loop_state::LoopState;
-use crate::pitch::{Pitch, Tone};
+use dawww_core::pitch::{Pitch, Tone};
 use crate::player::Player;
 use crate::resolution::Resolution;
 use crate::score::Score;

@@ -7,8 +7,7 @@ use std::io::BufReader;
 use std::collections::HashMap;
 
 use crate::score::Score;
-use crate::pitch::Tone;
-use crate::pitch::Pitch;
+use dawww_core::pitch::{Pitch, Tone};
 
 pub struct SongFile {
     current_path: Option<PathBuf>,

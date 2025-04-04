@@ -3,8 +3,8 @@
 use std::{collections::HashMap, f32::MAX};
 use log::debug;
 
+use dawww_core::pitch::{Pitch, Tone};
 use crate::{
-    pitch::{Pitch, Tone},
     selection_buffer,
 };
 use crate::selection_range::SelectionRange;

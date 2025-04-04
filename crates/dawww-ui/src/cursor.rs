@@ -6,7 +6,8 @@ use std::{
 
 use crossterm::cursor;
 
-use crate::{pitch::Pitch, score::Score};
+use dawww_core::pitch::Pitch;
+use crate::{score::Score};
 use crate::selection_range::SelectionRange;
 
 #[derive(Clone, Copy)]

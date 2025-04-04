@@ -1,4 +1,4 @@
-use crate::pitch::Pitch;
+use dawww_core::pitch::Pitch;
 
 #[derive(Debug, Clone, Copy)]
 pub struct SelectionRange {

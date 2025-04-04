@@ -1,4 +1,4 @@
-use crate::pitch::Pitch;
+use dawww_core::pitch::Pitch;
 
 pub mod score_draw_component;
 pub mod status_bar_component;
