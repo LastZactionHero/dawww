@@ -78,19 +78,27 @@ impl Score {
     }
 
     pub fn set_bpm(&mut self, bpm: u16) {
+        log::info!("Setting BPM to {}", bpm);
         self.daw_file.set_bpm(bpm as u32);
         self.try_save();
     }
 
     pub fn set_save_path(&mut self, path: PathBuf) {
+        log::info!("Setting save path to: {}", path.display());
         self.save_path = Some(path);
     }
 
     fn try_save(&mut self) {
+        log::info!("Attempting to save DawFile...");
         if let Some(path) = &self.save_path {
+            log::info!("Save path exists: {}", path.display());
             if let Err(e) = self.daw_file.save(path) {
                 log::error!("Auto-save failed: {}", e);
+            } else {
+                log::info!("Successfully saved DawFile to {}", path.display());
             }
+        } else {
+            log::warn!("No save path set, skipping save");
         }
     }
 
@@ -125,6 +133,7 @@ impl Score {
     }
 
     pub fn insert_or_remove(&mut self, pitch: Pitch, onset_b32: u64, duration_b32: u64) {
+        log::info!("Inserting/removing note: pitch={}, onset={}, duration={}", pitch, onset_b32, duration_b32);
         let time_str = self.b32_to_time_str(onset_b32);
         let daw_note = DawNote::new(pitch, duration_b32 as u32);
 
@@ -137,9 +146,11 @@ impl Score {
 
         if note_exists {
             // Remove the note
+            log::info!("Removing existing note");
             self.daw_file.remove_note(&time_str, "synth1", &daw_note).unwrap();
         } else {
             // Add the note
+            log::info!("Adding new note");
             self.daw_file.add_note(&time_str, "synth1", daw_note).unwrap();
         }
 
@@ -209,6 +220,7 @@ impl Score {
     }
 
     pub fn insert(&mut self, pitch: Pitch, onset_b32: u64, duration_b32: u64) {
+        log::info!("Inserting note: pitch={}, onset={}, duration={}", pitch, onset_b32, duration_b32);
         let time_str = self.b32_to_time_str(onset_b32);
         let end_b32 = onset_b32 + duration_b32;
 
@@ -226,6 +238,10 @@ impl Score {
                     }
                 }
             }
+        }
+
+        if !overlapping_notes.is_empty() {
+            log::info!("Found {} overlapping notes to merge", overlapping_notes.len());
         }
 
         // Remove all overlapping notes
@@ -258,6 +274,7 @@ impl Score {
         let merged_time = self.b32_to_time_str(merged_onset);
         let merged_duration = merged_end - merged_onset;
         let daw_note = DawNote::new(pitch, merged_duration as u32);
+        log::info!("Adding merged note: time={}, duration={}", merged_time, merged_duration);
         self.daw_file.add_note(&merged_time, "synth1", daw_note).unwrap();
         self.try_save();
     }
@@ -337,6 +354,11 @@ impl Score {
     }
 
     pub fn delete_in_selection(&mut self, selection_range: SelectionRange) {
+        log::info!("Deleting notes in selection range: time={}-{}, pitch={}-{}", 
+            selection_range.time_point_start_b32,
+            selection_range.time_point_end_b32,
+            selection_range.pitch_low,
+            selection_range.pitch_high);
         let start_time = self.b32_to_time_str(selection_range.time_point_start_b32);
         let end_time = self.b32_to_time_str(selection_range.time_point_end_b32);
 
@@ -354,6 +376,8 @@ impl Score {
             }
         }
 
+        log::info!("Found {} notes to remove", notes_to_remove.len());
+
         // Then remove them
         for (time, note) in notes_to_remove {
             self.daw_file.remove_note(&time, "synth1", &note).unwrap();
@@ -363,9 +387,13 @@ impl Score {
     }
 
     pub fn save_to_file(&mut self, path: &PathBuf) -> Result<(), anyhow::Error> {
+        log::info!("Saving to file: {}", path.display());
         let result = self.daw_file.save(path);
         if result.is_ok() {
+            log::info!("Successfully saved to file, updating save path");
             self.save_path = Some(path.clone());
+        } else {
+            log::error!("Failed to save to file: {:?}", result);
         }
         result
     }

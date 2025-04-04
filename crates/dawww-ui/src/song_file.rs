@@ -26,7 +26,7 @@ impl SongFile {
         PathBuf::from(format!("song_{}.txt", date))
     }
 
-    pub fn save(&mut self, score: &Score) -> io::Result<()> {
+    pub fn save(&mut self, score: &mut Score) -> io::Result<()> {
         let path = self.current_path.clone()
             .unwrap_or_else(|| self.generate_default_filename());
         
@@ -71,7 +71,8 @@ impl SongFile {
             }
         }
         
-        self.current_path = Some(path);
+        self.current_path = Some(path.clone());
+        score.set_save_path(path);
         Ok(())
     }
 
@@ -79,7 +80,8 @@ impl SongFile {
         let content = std::fs::read_to_string(&path)?;
         let daw_file = dawww_core::read_daw_file(&path)
             .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
-        let score = Score::from_daw_file(daw_file);
+        let mut score = Score::from_daw_file(daw_file);
+        score.set_save_path(path.clone());
         self.current_path = Some(path);
         self.score = score.clone();
 

@@ -1,63 +1,14 @@
-16:35:24 [INFO] Application starting...
-16:35:24 [INFO] Loading song from ../../sample_song/song.daw.json
-16:35:24 [INFO] Loaded notes: {
-    16: [
-        Note {
-            pitch: Pitch {
-                tone: C,
-                octave: 4,
-            },
-            onset_b32: 16,
-            duration_b32: 8,
-        },
-    ],
-    96: [
+16:58:20 [INFO] Application starting...
+16:58:20 [INFO] Loading song from ../../sample_song/song.daw.json
+16:58:20 [INFO] Setting save path to: ../../sample_song/song.daw.json
+16:58:20 [INFO] Loaded notes: {
+    32: [
         Note {
             pitch: Pitch {
                 tone: E,
                 octave: 4,
             },
-            onset_b32: 96,
-            duration_b32: 8,
-        },
-    ],
-    104: [
-        Note {
-            pitch: Pitch {
-                tone: G,
-                octave: 4,
-            },
-            onset_b32: 104,
-            duration_b32: 8,
-        },
-    ],
-    8: [
-        Note {
-            pitch: Pitch {
-                tone: D,
-                octave: 4,
-            },
-            onset_b32: 8,
-            duration_b32: 8,
-        },
-    ],
-    40: [
-        Note {
-            pitch: Pitch {
-                tone: E,
-                octave: 4,
-            },
-            onset_b32: 40,
-            duration_b32: 8,
-        },
-    ],
-    112: [
-        Note {
-            pitch: Pitch {
-                tone: G,
-                octave: 4,
-            },
-            onset_b32: 112,
+            onset_b32: 32,
             duration_b32: 8,
         },
     ],
@@ -81,6 +32,16 @@
             duration_b32: 8,
         },
     ],
+    80: [
+        Note {
+            pitch: Pitch {
+                tone: D,
+                octave: 4,
+            },
+            onset_b32: 80,
+            duration_b32: 8,
+        },
+    ],
     0: [
         Note {
             pitch: Pitch {
@@ -90,14 +51,90 @@
             onset_b32: 0,
             duration_b32: 8,
         },
-    ],
-    32: [
         Note {
             pitch: Pitch {
-                tone: E,
+                tone: A,
+                octave: 3,
+            },
+            onset_b32: 0,
+            duration_b32: 2,
+        },
+    ],
+    16: [
+        Note {
+            pitch: Pitch {
+                tone: C,
                 octave: 4,
             },
-            onset_b32: 32,
+            onset_b32: 16,
+            duration_b32: 8,
+        },
+    ],
+    112: [
+        Note {
+            pitch: Pitch {
+                tone: G,
+                octave: 4,
+            },
+            onset_b32: 112,
+            duration_b32: 8,
+        },
+    ],
+    104: [
+        Note {
+            pitch: Pitch {
+                tone: G,
+                octave: 4,
+            },
+            onset_b32: 104,
+            duration_b32: 8,
+        },
+    ],
+    4: [
+        Note {
+            pitch: Pitch {
+                tone: A,
+                octave: 3,
+            },
+            onset_b32: 4,
+            duration_b32: 2,
+        },
+    ],
+    12: [
+        Note {
+            pitch: Pitch {
+                tone: A,
+                octave: 3,
+            },
+            onset_b32: 12,
+            duration_b32: 2,
+        },
+    ],
+    8: [
+        Note {
+            pitch: Pitch {
+                tone: D,
+                octave: 4,
+            },
+            onset_b32: 8,
+            duration_b32: 8,
+        },
+        Note {
+            pitch: Pitch {
+                tone: A,
+                octave: 3,
+            },
+            onset_b32: 8,
+            duration_b32: 2,
+        },
+    ],
+    72: [
+        Note {
+            pitch: Pitch {
+                tone: D,
+                octave: 4,
+            },
+            onset_b32: 72,
             duration_b32: 8,
         },
     ],
@@ -111,27 +148,31 @@
             duration_b32: 8,
         },
     ],
-    72: [
+    96: [
         Note {
             pitch: Pitch {
-                tone: D,
+                tone: E,
                 octave: 4,
             },
-            onset_b32: 72,
+            onset_b32: 96,
             duration_b32: 8,
         },
     ],
-    80: [
+    40: [
         Note {
             pitch: Pitch {
-                tone: D,
+                tone: E,
                 octave: 4,
             },
-            onset_b32: 80,
+            onset_b32: 40,
             duration_b32: 8,
         },
     ],
 }
-16:35:24 [INFO] Successfully loaded song from ../../sample_song/song.daw.json
-16:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=204, h=14
-16:35:24 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+16:58:20 [INFO] Successfully loaded song from ../../sample_song/song.daw.json
+16:58:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=204, h=14
+16:58:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+16:58:21 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=204, h=14
+16:58:21 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+16:58:21 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=204, h=14
+16:58:21 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches

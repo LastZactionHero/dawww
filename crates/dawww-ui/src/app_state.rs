@@ -254,8 +254,8 @@ impl AppState {
                         
                         // File operations
                         InputEvent::SaveSong => {
-                            let score = self.score.lock().unwrap();
-                            if let Err(e) = self.song_file.save(&score) {
+                            let mut score = self.score.lock().unwrap();
+                            if let Err(e) = self.song_file.save(&mut score) {
                                 error!("Failed to save song: {}", e);
                             }
                         }
