@@ -5,8 +5,8 @@ use log::debug;
 use std::path::PathBuf;
 
 use dawww_core::{
-    pitch::Pitch,
-    DawFile, Note as DawNote,
+    pitch::{Pitch, Tone},
+    DawFile, Note as DawNote, Instrument,
 };
 use crate::selection_range::SelectionRange;
 
@@ -41,7 +41,7 @@ pub struct Score {
 impl Score {
     pub fn new() -> Self {
         let mut daw_file = DawFile::new("Untitled".to_string());
-        daw_file.add_instrument("default".to_string(), dawww_core::Instrument::new_sampler("default".into())).unwrap();
+        daw_file.add_instrument("default".to_string(), Instrument::new_sampler("default".into())).unwrap();
         
         Self {
             daw_file,
@@ -54,7 +54,7 @@ impl Score {
     pub fn from_daw_file(mut daw_file: DawFile) -> Self {
         // Ensure the default instrument exists
         if daw_file.get_instrument("default").is_none() {
-            daw_file.add_instrument("default".to_string(), dawww_core::Instrument::new_sampler("default".into()))
+            daw_file.add_instrument("default".to_string(), Instrument::new_sampler("default".into()))
                 .expect("Failed to add default instrument"); // Use expect for clearer error
         }
 
