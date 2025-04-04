@@ -9,4 +9,5 @@ log = "0.4"
 simplelog = "0.12"
 chrono = "0.4"
 dawww-core = { path = "../dawww-core" }
+dawww-render = { path = "../dawww-render" }
 anyhow = "1.0"

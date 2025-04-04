@@ -6,6 +6,7 @@ use dawww_core::{
     pitch::{Pitch, Tone},
     DawFile, Note as DawNote, Instrument,
 };
+use dawww_render::AudioEngine;
 use crate::selection_range::SelectionRange;
 
 #[derive(Debug, Clone, Copy)]
@@ -96,6 +97,61 @@ impl Score {
                 log::error!("Auto-save failed: {}", e);
             } else {
                 log::info!("Successfully saved DawFile to {}", path.display());
+
+                // Create mixdown directory if it doesn't exist
+                let mixdown_dir = path.parent().unwrap().join("mixdown");
+                log::info!("Creating mixdown directory at: {}", mixdown_dir.display());
+                if let Err(e) = std::fs::create_dir_all(&mixdown_dir) {
+                    log::error!("Failed to create mixdown directory: {}", e);
+                    return;
+                }
+                log::info!("Mixdown directory created successfully");
+
+                // Generate WAV filename with revision ID
+                let revision = self.daw_file.metadata.revision;
+                let wav_filename = format!("_{:05}.wav", revision);
+                let wav_path = mixdown_dir.join(wav_filename);
+                log::info!("Rendering mixdown to: {}", wav_path.display());
+
+                // Render the WAV file
+                log::info!("Creating AudioEngine with current DAW file");
+                let audio_engine = AudioEngine::new(self.daw_file.clone());
+                log::info!("Starting WAV file rendering...");
+                match audio_engine.render(&wav_path) {
+                    Ok(_) => {
+                        log::info!("Successfully rendered mixdown to {}", wav_path.display());
+                        
+                        // Clean up old mixdown files
+                        if let Ok(entries) = std::fs::read_dir(&mixdown_dir) {
+                            let mut wav_files: Vec<_> = entries
+                                .filter_map(|entry| {
+                                    let entry = entry.ok()?;
+                                    let path = entry.path();
+                                    if path.extension()? == "wav" {
+                                        Some(path)
+                                    } else {
+                                        None
+                                    }
+                                })
+                                .collect();
+
+                            // Sort by filename (which contains revision number)
+                            wav_files.sort();
+
+                            // Keep only the last 3 files
+                            if wav_files.len() > 3 {
+                                for old_file in wav_files.iter().take(wav_files.len() - 3) {
+                                    if let Err(e) = std::fs::remove_file(old_file) {
+                                        log::error!("Failed to remove old mixdown file {}: {}", old_file.display(), e);
+                                    } else {
+                                        log::info!("Removed old mixdown file: {}", old_file.display());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Err(e) => log::error!("Failed to render mixdown: {}", e),
+                }
             }
         } else {
             log::warn!("No save path set, skipping save");
@@ -392,6 +448,30 @@ impl Score {
         if result.is_ok() {
             log::info!("Successfully saved to file, updating save path");
             self.save_path = Some(path.clone());
+
+            // Create mixdown directory if it doesn't exist
+            let mixdown_dir = path.parent().unwrap().join("mixdown");
+            log::info!("Creating mixdown directory at: {}", mixdown_dir.display());
+            std::fs::create_dir_all(&mixdown_dir)?;
+            log::info!("Mixdown directory created successfully");
+
+            // Generate WAV filename with revision ID
+            let revision = self.daw_file.metadata.revision;
+            let wav_filename = format!("_{:05}.wav", revision);
+            let wav_path = mixdown_dir.join(wav_filename);
+            log::info!("Rendering mixdown to: {}", wav_path.display());
+
+            // Render the WAV file
+            log::info!("Creating AudioEngine with current DAW file");
+            let audio_engine = AudioEngine::new(self.daw_file.clone());
+            log::info!("Starting WAV file rendering...");
+            match audio_engine.render(&wav_path) {
+                Ok(_) => log::info!("Successfully rendered mixdown to {}", wav_path.display()),
+                Err(e) => {
+                    log::error!("Failed to render mixdown: {}", e);
+                    return Err(e.into());
+                }
+            }
         } else {
             log::error!("Failed to save to file: {:?}", result);
         }

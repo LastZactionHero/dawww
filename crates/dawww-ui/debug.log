@@ -1,112 +1,34 @@
-16:58:20 [INFO] Application starting...
-16:58:20 [INFO] Loading song from ../../sample_song/song.daw.json
-16:58:20 [INFO] Setting save path to: ../../sample_song/song.daw.json
-16:58:20 [INFO] Loaded notes: {
-    32: [
+20:05:37 [INFO] Application starting...
+20:05:37 [INFO] Loading song from ../../sample_song/song.daw.json
+20:05:37 [INFO] Setting save path to: ../../sample_song/song.daw.json
+20:05:37 [INFO] Loaded notes: {
+    40: [
         Note {
             pitch: Pitch {
                 tone: E,
                 octave: 4,
             },
-            onset_b32: 32,
+            onset_b32: 40,
             duration_b32: 8,
         },
     ],
-    24: [
+    2: [
         Note {
             pitch: Pitch {
-                tone: D,
+                tone: Cs,
                 octave: 4,
             },
-            onset_b32: 24,
-            duration_b32: 8,
-        },
-    ],
-    64: [
-        Note {
-            pitch: Pitch {
-                tone: D,
-                octave: 4,
-            },
-            onset_b32: 64,
-            duration_b32: 8,
-        },
-    ],
-    80: [
-        Note {
-            pitch: Pitch {
-                tone: D,
-                octave: 4,
-            },
-            onset_b32: 80,
-            duration_b32: 8,
-        },
-    ],
-    0: [
-        Note {
-            pitch: Pitch {
-                tone: E,
-                octave: 4,
-            },
-            onset_b32: 0,
-            duration_b32: 8,
-        },
-        Note {
-            pitch: Pitch {
-                tone: A,
-                octave: 3,
-            },
-            onset_b32: 0,
+            onset_b32: 2,
             duration_b32: 2,
         },
     ],
-    16: [
+    14: [
         Note {
             pitch: Pitch {
-                tone: C,
-                octave: 4,
-            },
-            onset_b32: 16,
-            duration_b32: 8,
-        },
-    ],
-    112: [
-        Note {
-            pitch: Pitch {
-                tone: G,
-                octave: 4,
-            },
-            onset_b32: 112,
-            duration_b32: 8,
-        },
-    ],
-    104: [
-        Note {
-            pitch: Pitch {
-                tone: G,
-                octave: 4,
-            },
-            onset_b32: 104,
-            duration_b32: 8,
-        },
-    ],
-    4: [
-        Note {
-            pitch: Pitch {
-                tone: A,
+                tone: B,
                 octave: 3,
             },
-            onset_b32: 4,
-            duration_b32: 2,
-        },
-    ],
-    12: [
-        Note {
-            pitch: Pitch {
-                tone: A,
-                octave: 3,
-            },
-            onset_b32: 12,
+            onset_b32: 14,
             duration_b32: 2,
         },
     ],
@@ -121,20 +43,46 @@
         },
         Note {
             pitch: Pitch {
-                tone: A,
+                tone: D,
+                octave: 4,
+            },
+            onset_b32: 8,
+            duration_b32: 2,
+        },
+        Note {
+            pitch: Pitch {
+                tone: B,
+                octave: 3,
+            },
+            onset_b32: 8,
+            duration_b32: 6,
+        },
+        Note {
+            pitch: Pitch {
+                tone: B,
                 octave: 3,
             },
             onset_b32: 8,
             duration_b32: 2,
         },
     ],
-    72: [
+    80: [
         Note {
             pitch: Pitch {
                 tone: D,
                 octave: 4,
             },
-            onset_b32: 72,
+            onset_b32: 80,
+            duration_b32: 8,
+        },
+    ],
+    16: [
+        Note {
+            pitch: Pitch {
+                tone: C,
+                octave: 4,
+            },
+            onset_b32: 16,
             duration_b32: 8,
         },
     ],
@@ -148,6 +96,56 @@
             duration_b32: 8,
         },
     ],
+    10: [
+        Note {
+            pitch: Pitch {
+                tone: B,
+                octave: 3,
+            },
+            onset_b32: 10,
+            duration_b32: 2,
+        },
+    ],
+    32: [
+        Note {
+            pitch: Pitch {
+                tone: E,
+                octave: 4,
+            },
+            onset_b32: 32,
+            duration_b32: 8,
+        },
+    ],
+    112: [
+        Note {
+            pitch: Pitch {
+                tone: G,
+                octave: 4,
+            },
+            onset_b32: 112,
+            duration_b32: 8,
+        },
+    ],
+    4: [
+        Note {
+            pitch: Pitch {
+                tone: Cs,
+                octave: 4,
+            },
+            onset_b32: 4,
+            duration_b32: 2,
+        },
+    ],
+    24: [
+        Note {
+            pitch: Pitch {
+                tone: D,
+                octave: 4,
+            },
+            onset_b32: 24,
+            duration_b32: 8,
+        },
+    ],
     96: [
         Note {
             pitch: Pitch {
@@ -158,21 +156,87 @@
             duration_b32: 8,
         },
     ],
-    40: [
+    0: [
         Note {
             pitch: Pitch {
                 tone: E,
                 octave: 4,
             },
-            onset_b32: 40,
+            onset_b32: 0,
+            duration_b32: 8,
+        },
+        Note {
+            pitch: Pitch {
+                tone: Cs,
+                octave: 4,
+            },
+            onset_b32: 0,
+            duration_b32: 4,
+        },
+    ],
+    72: [
+        Note {
+            pitch: Pitch {
+                tone: D,
+                octave: 4,
+            },
+            onset_b32: 72,
+            duration_b32: 8,
+        },
+    ],
+    64: [
+        Note {
+            pitch: Pitch {
+                tone: D,
+                octave: 4,
+            },
+            onset_b32: 64,
+            duration_b32: 8,
+        },
+    ],
+    104: [
+        Note {
+            pitch: Pitch {
+                tone: G,
+                octave: 4,
+            },
+            onset_b32: 104,
             duration_b32: 8,
         },
     ],
 }
-16:58:20 [INFO] Successfully loaded song from ../../sample_song/song.daw.json
-16:58:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=204, h=14
-16:58:20 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-16:58:21 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=204, h=14
-16:58:21 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
-16:58:21 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=204, h=14
-16:58:21 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:37 [INFO] Successfully loaded song from ../../sample_song/song.daw.json
+20:05:37 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:37 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:38 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:38 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:38 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:38 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:38 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:38 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:39 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:39 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:39 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:39 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:39 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:39 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:40 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:40 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:40 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:40 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:41 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:41 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:41 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:41 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:42 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:42 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:42 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:42 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:42 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:42 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:43 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:43 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:43 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:43 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
+20:05:43 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=132, h=14
+20:05:43 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 12 visible pitches
