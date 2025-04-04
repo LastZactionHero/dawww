@@ -174,7 +174,7 @@ impl AppState {
                         // Note editing
                         InputEvent::InsertNote => {
                             match self.cursor.mode() {
-                                CursorMode::Select(start, end) => {
+                                CursorMode::Select(_, _) => {
                                     // Insert notes for the entire selection
                                     let selection_range = self.cursor.selection_range().unwrap();
                                     let pitch = self.cursor.pitch();
@@ -254,7 +254,8 @@ impl AppState {
                         
                         // File operations
                         InputEvent::SaveSong => {
-                            if let Err(e) = self.song_file.save(&self.score.lock().unwrap()) {
+                            let score = self.score.lock().unwrap();
+                            if let Err(e) = self.song_file.save(&score) {
                                 error!("Failed to save song: {}", e);
                             }
                         }
@@ -276,6 +277,23 @@ impl AppState {
 
     fn draw(&mut self) -> io::Result<()> {
         let (width, height) = terminal::size()?;
+        
+        // Ensure minimum terminal size
+        const MIN_WIDTH: u16 = 80;
+        const MIN_HEIGHT: u16 = 24;
+        
+        if width < MIN_WIDTH || height < MIN_HEIGHT {
+            let mut stdout = io::stdout();
+            stdout.execute(terminal::Clear(ClearType::All))?;
+            stdout.queue(cursor::MoveTo(0, 0))?;
+            stdout.queue(style::Print(format!(
+                "Terminal too small. Minimum size required: {}x{} (current: {}x{})",
+                MIN_WIDTH, MIN_HEIGHT, width, height
+            )))?;
+            stdout.flush()?;
+            return Ok(());
+        }
+
         let mut buffer = vec![vec![' '; width as usize]; height as usize];
 
         let mut stdout = io::stdout();

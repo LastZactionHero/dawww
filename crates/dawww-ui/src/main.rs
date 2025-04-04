@@ -24,7 +24,6 @@ mod song_file;
 
 use app_state::AppState;
 use crate::score::Score;
-use std::collections::HashMap;
 use crate::song_file::SongFile;
 
 fn main() -> io::Result<()> {
@@ -38,25 +37,27 @@ fn main() -> io::Result<()> {
 
     info!("Application starting...");
 
-    let score = if let Some(path) = env::args().nth(1) {
+    let mut song_file = SongFile::new();
+    if let Some(path) = env::args().nth(1) {
         info!("Loading song from {}", path);
-        match SongFile::load(PathBuf::from(&path)) {
-            Ok(loaded_score) => {
+        match song_file.load(PathBuf::from(&path)) {
+            Ok(score) => {
                 info!("Successfully loaded song from {}", path);
-                Arc::new(Mutex::new(loaded_score))
+                let score = Arc::new(Mutex::new(score));
+                let mut app_state = AppState::new(score);
+                app_state.run()?;
             }
             Err(e) => {
-                eprintln!("Failed to load song from {}: {}", path, e);
+                error!("Error loading file: {}", e);
                 std::process::exit(1);
             }
         }
     } else {
         info!("Starting with blank song");
-        Arc::new(Mutex::new(Score::new()))
-    };
-    
-    let mut app_state = AppState::new(score);
-    app_state.run()?;
+        let score = Arc::new(Mutex::new(Score::new()));
+        let mut app_state = AppState::new(score);
+        app_state.run()?;
+    }
 
     Ok(())
 }

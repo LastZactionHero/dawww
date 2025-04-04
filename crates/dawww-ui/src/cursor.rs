@@ -1,13 +1,8 @@
-use core::panic;
 use std::{
     fmt,
-    sync::{Arc, Mutex},
 };
 
-use crossterm::cursor;
-
 use dawww_core::pitch::Pitch;
-use crate::{score::Score};
 use crate::selection_range::SelectionRange;
 
 #[derive(Clone, Copy)]
@@ -113,9 +108,6 @@ impl Cursor {
     }
 
     pub fn visible_at(self, pitch: Pitch, time_point: u64) -> bool {
-        if !self.visible() {
-            return false;
-        }
         match self.mode {
             CursorMode::Move | CursorMode::Yank => {
                 time_point == self.time_point && self.pitch == pitch

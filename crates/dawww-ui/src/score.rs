@@ -1,14 +1,12 @@
 // score.rs
 
-use std::{collections::HashMap, f32::MAX};
+use std::collections::HashMap;
 use log::debug;
+use std::path::PathBuf;
 
 use dawww_core::{
-    pitch::{Pitch, Tone},
-    DawFile, Event, Note as DawNote,
-};
-use crate::{
-    selection_buffer,
+    pitch::Pitch,
+    DawFile, Note as DawNote,
 };
 use crate::selection_range::SelectionRange;
 
@@ -37,6 +35,7 @@ pub struct Score {
     daw_file: DawFile,
     notes: HashMap<u64, Vec<Note>>,
     active_notes: HashMap<u64, Vec<ActiveNote>>,
+    save_path: Option<PathBuf>,
 }
 
 impl Score {
@@ -48,14 +47,22 @@ impl Score {
             daw_file,
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         }
     }
 
-    pub fn from_daw_file(daw_file: DawFile) -> Self {
+    pub fn from_daw_file(mut daw_file: DawFile) -> Self {
+        // Ensure the default instrument exists
+        if daw_file.get_instrument("default").is_none() {
+            daw_file.add_instrument("default".to_string(), dawww_core::Instrument::new_sampler("default".into()))
+                .expect("Failed to add default instrument");
+        }
+
         let mut score = Self {
             daw_file,
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
         score.sync_from_daw_file();
         score
@@ -115,6 +122,19 @@ impl Score {
 
     pub fn set_bpm(&mut self, bpm: u16) {
         self.daw_file.set_bpm(bpm as u32);
+        self.try_save();
+    }
+
+    pub fn set_save_path(&mut self, path: PathBuf) {
+        self.save_path = Some(path);
+    }
+
+    fn try_save(&mut self) {
+        if let Some(path) = &self.save_path {
+            if let Err(e) = self.daw_file.save(path) {
+                log::error!("Auto-save failed: {}", e);
+            }
+        }
     }
 
     pub fn get_notes(&self) -> &HashMap<u64, Vec<Note>> {
@@ -178,6 +198,7 @@ impl Score {
             let time_str = self.b32_to_time_str(onset_b32);
             let daw_note = DawNote::new(pitch, duration_b32 as u32);
             self.daw_file.remove_note(&time_str, "default", &daw_note).unwrap();
+            self.try_save();
             return;
         }
 
@@ -202,6 +223,7 @@ impl Score {
         let time_str = self.b32_to_time_str(onset_b32);
         let daw_note = DawNote::new(pitch, duration_b32 as u32);
         self.daw_file.add_note(&time_str, "default", daw_note).unwrap();
+        self.try_save();
     }
 
     pub fn clone_at_selection(&self, selection_range: SelectionRange) -> Score {
@@ -329,6 +351,7 @@ impl Score {
         let time_str = self.b32_to_time_str(merged_onset);
         let daw_note = DawNote::new(pitch, (merged_end - merged_onset) as u32);
         self.daw_file.add_note(&time_str, "default", daw_note).unwrap();
+        self.try_save();
     }
 
     pub fn merge_down(&self, other: &Score) -> Score {
@@ -433,7 +456,7 @@ impl Score {
                 for note in remove {
                     let time_str = self.b32_to_time_str(onset_b32);
                     let daw_note = DawNote::new(note.pitch, note.duration_b32 as u32);
-                    self.daw_file.remove_note(&time_str, "default", &daw_note).unwrap();
+                    let _ = self.daw_file.remove_note(&time_str, "default", &daw_note);
                 }
             }
         }
@@ -465,6 +488,15 @@ impl Score {
         }
 
         debug!("Finished rebuilding active_notes");
+        self.try_save();
+    }
+
+    pub fn save_to_file(&mut self, path: &PathBuf) -> Result<(), anyhow::Error> {
+        let result = self.daw_file.save(path);
+        if result.is_ok() {
+            self.save_path = Some(path.clone());
+        }
+        result
     }
 }
 
@@ -478,6 +510,7 @@ mod tests {
             daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
         // Add some test notes
         score.insert(Pitch::new(Tone::C, 4), 0, 32); // C4 (MIDI 60)
@@ -515,6 +548,7 @@ mod tests {
             daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
 
         // Test insertion
@@ -567,6 +601,7 @@ mod tests {
             daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
 
         // Test basic insertion
@@ -586,6 +621,7 @@ mod tests {
             daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
         score1.insert(Pitch::new(Tone::C, 4), 0, 32);
 
@@ -593,6 +629,7 @@ mod tests {
             daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
         score2.insert(Pitch::new(Tone::E, 4), 0, 32);
 
@@ -606,6 +643,7 @@ mod tests {
             daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
         assert_eq!(empty_score.duration(), 0);
 
@@ -619,6 +657,7 @@ mod tests {
             daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
 
         // Add a note from time 0 to 32
@@ -653,6 +692,7 @@ mod tests {
             daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
 
         // Add two overlapping notes of the same pitch
@@ -680,6 +720,7 @@ mod tests {
             daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
 
         // Add and then remove a note
@@ -703,6 +744,7 @@ mod tests {
             daw_file: DawFile::new("Untitled".to_string()),
             notes: HashMap::new(),
             active_notes: HashMap::new(),
+            save_path: None,
         };
 
         // Add two notes at different pitches at the same time

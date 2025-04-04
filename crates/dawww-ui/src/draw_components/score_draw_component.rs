@@ -87,7 +87,6 @@ impl ScoreDrawComponent {
 
     fn draw_score(&self, buffer: &mut Vec<Vec<char>>, pos: &super::Position) -> ViewportDrawResult {
         let pitches = self.visible_pitches(pos);
-        let mut time_point = self.score_viewport.time_point;
         debug!("Drawing score with {} visible pitches", pitches.len());
 
         // Draw the empty score.
@@ -188,7 +187,7 @@ impl ScoreDrawComponent {
                 time_point += 1;
             }
 
-            for ((row, pitch), state) in col_states {
+            for ((row, _), state) in col_states {
                 let note_char = match state {
                     NoteState::Onset => '█',
                     NoteState::Sustain => '░',

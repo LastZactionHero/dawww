@@ -1,8 +1,7 @@
 // song.rs
 
 use dawww_core::pitch::{Pitch, Tone};
-use crate::score::{Note, Score, NoteState};
-use std::collections::HashMap;
+use crate::score::Score;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 

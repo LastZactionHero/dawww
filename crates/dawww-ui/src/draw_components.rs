@@ -192,7 +192,7 @@ impl DrawComponent for VSplitDrawComponent {
 pub struct NullComponent {}
 
 impl DrawComponent for NullComponent {
-    fn draw(&self, buffer: &mut Vec<Vec<char>>, pos: &Position) -> Vec<DrawResult> {
+    fn draw(&self, _buffer: &mut Vec<Vec<char>>, _pos: &Position) -> Vec<DrawResult> {
         vec![]
     }
 }
