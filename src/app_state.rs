@@ -31,6 +31,7 @@ use std::sync::{Arc, Mutex};
 use std::thread::{self, JoinHandle};
 use crate::song_file::SongFile;
 use log::error;
+use crate::audio::audio_player;
 
 pub struct AppState {
     score: Arc<Mutex<Score>>,
@@ -81,6 +82,13 @@ impl AppState {
         let input_tx = self.input_tx.clone();
         self.input_thread = Some(thread::spawn(move || {
             let _ = capture_input(&input_tx);
+        }));
+
+        // Start audio thread
+        let player_tx = self.input_tx.clone();
+        let player = Arc::clone(&self.player);
+        self.audio_thread = Some(thread::spawn(move || {
+            let _ = audio_player(&player, player_tx.clone());
         }));
 
         // Main loop

@@ -9,6 +9,7 @@ use std::{
 use std::env;
 use std::path::PathBuf;
 mod app_state;
+mod audio;
 mod cursor;
 mod draw_components;
 mod events;
