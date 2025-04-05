@@ -3,7 +3,6 @@ members = [
     "crates/dawww-core",
     "crates/dawww-render",
     "crates/sample-song-builder",
-    "crates/dawww-ui"
 ]
 
 [package]
@@ -22,3 +21,7 @@ anyhow = "1.0"
 thiserror = "1.0"
 dawww-core = { path = "crates/dawww-core" }
 dawww-render = { path = "crates/dawww-render" } 
+crossterm = "0.28.1"
+log = "0.4"
+simplelog = "0.12"
+chrono = "0.4"

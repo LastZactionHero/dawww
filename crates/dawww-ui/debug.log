@@ -1,4 +1,0 @@
-16:34:41 [INFO] Application starting...
-16:34:41 [INFO] Starting with blank song
-16:34:41 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
-16:34:41 [DEBUG] (1) dawww_ui::draw_components::score_draw_component: Drawing score with 28 visible pitches

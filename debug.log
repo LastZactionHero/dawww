@@ -1,0 +1,46 @@
+16:36:29 [INFO] Application starting...
+16:36:29 [INFO] Starting with blank song
+16:36:29 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:29 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:30 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:30 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:30 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:30 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:30 [INFO] Inserting/removing note: pitch=C4, onset=4, duration=2
+16:36:30 [INFO] Adding new note
+16:36:30 [INFO] Attempting to save DawFile...
+16:36:30 [WARN] No save path set, skipping save
+16:36:30 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:30 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:30 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:30 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:31 [INFO] Inserting/removing note: pitch=A#3, onset=10, duration=2
+16:36:31 [INFO] Adding new note
+16:36:31 [INFO] Attempting to save DawFile...
+16:36:31 [WARN] No save path set, skipping save
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:31 [INFO] Inserting/removing note: pitch=A#3, onset=12, duration=2
+16:36:31 [INFO] Adding new note
+16:36:31 [INFO] Attempting to save DawFile...
+16:36:31 [WARN] No save path set, skipping save
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:31 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:32 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:32 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:32 [INFO] Inserting/removing note: pitch=A3, onset=16, duration=2
+16:36:32 [INFO] Adding new note
+16:36:32 [INFO] Attempting to save DawFile...
+16:36:32 [WARN] No save path set, skipping save
+16:36:32 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:32 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches
+16:36:33 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score at position: x=1, y=1, w=126, h=29
+16:36:33 [DEBUG] (1) dawww::draw_components::score_draw_component: Drawing score with 28 visible pitches

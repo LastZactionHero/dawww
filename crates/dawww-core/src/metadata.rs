@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use std::time::{UNIX_EPOCH};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Metadata {
     pub title: String,
     pub creation_date: String,

@@ -10,9 +10,9 @@ pub mod instrument;
 
 use pitch::Pitch;
 use metadata::Metadata;
-use instrument::Instrument;
+pub use instrument::Instrument;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DawFile {
     pub metadata: Metadata,
     pub bpm: u32,
@@ -21,7 +21,7 @@ pub struct DawFile {
     pub events: Vec<Event>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct MixdownSettings {
     pub sample_rate: u32,
     pub bit_depth: u16,
